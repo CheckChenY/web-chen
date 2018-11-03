@@ -27,7 +27,7 @@ import {
 //userListss  => reducers/user/index->userListss
 //listsssss  => reducers/user/userList->listsssss
 const mapStateToProps = state => ({
-  lista: state.usereer.indexLanguage.listsssss,
+  lista: state.usereer.userListss.listsssss,
 });
 
 const mapDispatchToProps = dispatch => ({

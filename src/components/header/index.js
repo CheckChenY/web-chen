@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import intl from 'react-intl-universal';
 import {
     tabLanguange
   } from '../../redux/actions/header/index';
@@ -18,45 +19,52 @@ const Option = Select.Option;
 // import styles from './App.module.css';
 
 class Header extends Component {
+
+  handleContentChange(e){
+    if (this.props.onSubmit) {
+      const { tabLanguange } = this.props;
+      console.log(e);
+      tabLanguange(e);
+    }
+    // this.setState({ content: '' })
+  }
+  
   render() {
-    const self = this,
-    { tabLanguange=()=>{},lanage } = self.props;
-    console.log(lanage);
+    // const self = this,
+    // { tabLanguange=()=>{},language } = self.props;
+    // console.log(language);
     return (
       <div>
         <div>
-          <Select defaultValue="zh-CN" style={{ width: 120 }} onChange={tabLanguange}>
+          <Select defaultValue="zh-CN" style={{ width: 120 }} 
+          onChange={this.handleContentChange.bind(this)}
+          // onChange={tabLanguange}
+          >
             <Option value="zh-CN">中文</Option>
             <Option value="zh-TW">繁体</Option>
             <Option value="zh-EN">英文</Option>
           </Select>
         </div>
         <div style={{textAlign:'center',paddingTop:'40px'}}>
-            测试数据
+        {intl.get('userlist')}
         </div>
       </div>
     );
   }
 }
 
-
-// const mapStateToProps = state => ({
-//   language: state.lan.tabLanguange.language,
-// });
+const mapStateToProps = state => ({
+  language: state.lan.indexLanguage.lanage,
+});
 // debugger;
-const mapDispatchToProps = state => ({
 
-  state:state.rootReducer
-  // tabLanguange(d) {
-  //     dispatch(tabLanguange(d));
-  // }
+const mapDispatchToProps = dispatch => ({
+    tabLanguange(data) {
+        dispatch(tabLanguange(data));
+    }
 });
 
 export default connect(
-// mapStateToProps,
-mapDispatchToProps,{
-  tabLanguange
-}
-)(Header);
+mapStateToProps,
+mapDispatchToProps)(Header);
 
-// export default Header;

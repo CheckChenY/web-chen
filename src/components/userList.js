@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import intl from 'react-intl-universal';
+import Header from './header/index';
 // import { connect } from 'react-redux';
-// import {
-//   fetchAllUserList
-// } from '../redux/actions/user';
+import {
+  tabLanguange
+} from '../redux/actions/header/index';
 import { Table,Button } from 'antd';
 
 class UserList extends Component {
-    // componentDidMount() {
-    //   const self = this,
-    //   { fetchAllUserList } = self.props;
-    //   fetchAllUserList(); //获取数据渲染页面
-    //     // console.log(this.props);
-    //     // this.props.fetchAllUserList();
-    // }
+  handleSubmitComment (comment) {
+    const { tabLanguange } = this.props;
+      // console.log(e);
+      tabLanguange(comment);
+    console.log(comment)
+  }
 
   render() {
     const self = this,
@@ -33,14 +35,15 @@ class UserList extends Component {
     }];
     return (
       <div>
-        <h1 style={{ textAlign: 'center' }}>用户列表页</h1>
+        <Header onSubmit={this.handleSubmitComment.bind(this)} />
+        <h1 style={{ textAlign: 'center' }}>{intl.get('userlistTable')}</h1>
         <div>
           <Button type='primary'
             onClick={
               fetchAllUserList
             }
           >
-            獲取數據
+            获取数据
           </Button>
         </div>
         <div style={{ width: '50%', margin: '10px auto' }}>
@@ -52,14 +55,15 @@ class UserList extends Component {
 }
 
 
-// const mapDispatchToProps = state => ({
-//   state:state
-// });
-// export default connect(
-//     mapDispatchToProps,{
-//       fetchAllUserList
-//   }
-// )(UserList);
-export default UserList;
+const mapDispatchToProps = state => {
+  return state.lan.indexLanguage
+};
+
+export default connect(
+  mapDispatchToProps, {
+    tabLanguange
+  }
+)(UserList);
+// export default UserList;
 
 

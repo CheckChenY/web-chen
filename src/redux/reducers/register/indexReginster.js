@@ -8,7 +8,8 @@ import {
 
 
 const initialState = {
-    list: []
+    list: [],
+    lanage:'zh-CN'
 };
 
 

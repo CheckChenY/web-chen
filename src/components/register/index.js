@@ -1,11 +1,9 @@
 import React,{ Component } from 'react';
 import { Button } from 'antd';
+import intl from 'react-intl-universal';
 import Header from '../header/index';
 
 class Reginster extends Component{
-    componentWillReceiveProps(){
-        alert(123)
-    }
 
     render(){
         const self = this,
@@ -18,7 +16,7 @@ class Reginster extends Component{
                     <Button type='primary'
                         onClick={()=>plusAction(plus?plus:1)}
                     >
-                        點我加{plus?plus:1}
+                        {intl.get('plus')}{plus?plus:1}
                     </Button>
                 </div>
             </div>
